@@ -1,27 +1,25 @@
-from os.path import dirname
+from pathlib import Path
 
-from .operations.command_validation_error import CommandValidationError
-from .operations import OperationManager
-from .operations.commands.exit import exit
-from .operations.commands.get_current_path import get_current_path
-from .operations.commands.list_files import list_files
-from .operations.commands.travel import travel
+from .commands.command_validation_error import CommandValidationError
+from .commands import CommandManager
+from .commands.handlers.exit import exit
+from .commands.handlers.get_current_path import get_current_path
+from .commands.handlers.list_files import list_files
+from .commands.handlers.travel import travel
 from . import globals
 
 
 def main():
-    globals.current_path = dirname(__file__)
+    globals.current_path = Path.cwd()
 
-    operation_manager = OperationManager()
+    operation_manager = CommandManager()
     operation_manager.add(exit, get_current_path, list_files, travel)
-
-    available_commands = operation_manager.get_command_names()
 
     print("PyFile started...")
     while globals.run_loop:
         try:
-            command = input("pyfu>>>" + globals.current_path + ">")
-            operation_manager.verify_command(command)
-            operation_manager.run_command(command)
+            input_command = input("pyfu>>>" + str(globals.current_path.resolve()) + ">")
+            operation_manager.verify_command(input_command)
+            operation_manager.run_command(input_command)
         except CommandValidationError as e:
             print(f"Invalid command: {e}")

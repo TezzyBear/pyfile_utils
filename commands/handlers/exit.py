@@ -1,4 +1,4 @@
-from ..operation import Operation
+from ..command import Command
 from ... import globals
 
 command_name = "exit"
@@ -9,4 +9,4 @@ def command_cb():
     globals.run_loop = False
 
 
-exit = Operation(command_name, command_cb)
+exit = Command(command_name, command_cb)

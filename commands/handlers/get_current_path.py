@@ -1,4 +1,4 @@
-from ..operation import Operation
+from ..command import Command
 from ...globals import current_path
 
 command_name = "gcp"
@@ -9,4 +9,4 @@ def command_cb():
     # TODO: print current path
 
 
-get_current_path = Operation(command_name, command_cb)
+get_current_path = Command(command_name, command_cb)

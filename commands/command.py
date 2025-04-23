@@ -3,8 +3,8 @@ from typing import Callable
 
 
 @dataclass
-class Operation:
-    _command_name: str
+class Command:
+    _name: str
     _callback: Callable[[], None]
     # Aditional options to modify functionality of command
     _options: list[str] = field(default_factory=list)
@@ -13,11 +13,11 @@ class Operation:
 
     @property
     def command_name(self):
-        return self._command_name
+        return self._name
 
-    def run(self, options: str | None = None):
+    def run(self, options: str | None = None, params: dict | None = None):
         if options:
-            self._callback(options)
+            self._callback(options, params)
         else:
             self._callback()
 

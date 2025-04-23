@@ -5,7 +5,7 @@ from ..command import Command
 from ... import globals
 
 command_name = "t"
-sub_command_names = ["up", "down", "in"]
+sub_command_names = ["up", "down", "in", "out"]
 
 
 # t:down operations
@@ -26,6 +26,9 @@ def command_cb(option: Literal["up", "down", "in"], arguments: list[str] | None 
                 print(e)
 
         case "in":
+            pass
+
+        case "out":
             pass
 
 

@@ -15,11 +15,8 @@ class Command:
     def command_name(self):
         return self._name
 
-    def run(self, options: str | None = None, params: dict | None = None):
-        if options:
-            self._callback(options, params)
-        else:
-            self._callback()
+    def run(self, runArgs: dict = field(default_factory=dict)):
+        self._callback(**runArgs)
 
     def add_option(self, option_name: str):
         self._options.append(option_name)
